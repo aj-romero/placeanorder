@@ -7,6 +7,18 @@
     <groupId>com.ajromero</groupId>
     <artifactId>place-an-order</artifactId>
     <version>${revision}</version>
+    <packaging>pom</packaging>
+
+    <modules>
+        <module>web-app</module>
+    </modules>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.1.2</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
     <properties>
         <revision>1.0-SNAPSHOT</revision>
