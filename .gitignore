@@ -12,6 +12,9 @@ target/
 # Compiled class file
 *.class
 
+#flatten
+.flattened-pom.xml
+
 # Log file
 *.log
 
