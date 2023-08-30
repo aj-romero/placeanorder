@@ -1,1 +1,14 @@
-<p>main works!</p>
+<div class="container">
+    <div *ngIf="alert" class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>Sorry it is not possible!</strong> You should check you cart, add some items!
+        <button (click)=" closeAlert()" type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="container-title">
+        <h2>Products</h2>
+    </div>
+    <div class="container-products">
+        <app-product></app-product>
+    </div>
+</div>

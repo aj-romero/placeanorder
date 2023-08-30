@@ -1,1 +1,15 @@
-<p>header works!</p>
+<nav class="navbar">
+    <div class="navbar-logo">
+        <i class="fa-solid fa-store fa-3x"></i>
+    </div>
+    <div class="navbar-title"><h1>Place an Order</h1></div>
+    <div class="navbar-cart" (click)="onToggleCart()">
+        <div class="navbar-cart-items">
+            <p>{{count()}}</p>
+        </div>
+        <i class="fa fa-cart-shopping fa-2x"></i>
+    </div>
+</nav>
+<div class="cart" [ngClass]="{show:viewCart}">
+    <app-cart></app-cart>
+</div>

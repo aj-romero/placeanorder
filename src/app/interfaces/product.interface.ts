@@ -4,6 +4,6 @@ export interface Product {
     name:String,
     stock:number,
     price:number,
-    reserved:number,
     avaibleStock:number,
+    quantity:number
 }
