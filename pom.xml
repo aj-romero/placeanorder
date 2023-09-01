@@ -11,6 +11,7 @@
 
     <modules>
         <module>web-app</module>
+        <module>web-persistence</module>
     </modules>
 
     <parent>
