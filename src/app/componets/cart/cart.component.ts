@@ -51,11 +51,9 @@ export class CartComponent implements OnInit {
     let totalCart = this.totalCart();
     if(totalCart <= 0){
       this.storeService.viewAlert.next(true);
-      console.log('muestro mensaje de alerta');
       
     }else{
-      console.log('todo va bien, proceder con la compra!');
-      
+      this.storeService.isShowProducts.next(false);
     }
     
     

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Product } from '../interfaces/product.interface';
+import { ProductModel } from '../model/product-model';
 
 @Injectable({
   providedIn: 'root'
@@ -9,20 +10,25 @@ import { Product } from '../interfaces/product.interface';
 export class StoreService {
 
   api = 'http://localhost:9000/api/v1/';
-  private mylist:Product[] = [];
-  private myCart = new BehaviorSubject<Product[]>([]);
+  private mylist:ProductModel[] = [];
+  private myCart = new BehaviorSubject<ProductModel[]>([]);
   myCart$ = this.myCart.asObservable();
 
   public viewCart = new BehaviorSubject<boolean>(false);
   public viewAlert = new BehaviorSubject<boolean>(false);
+  public isShowProducts = new BehaviorSubject<boolean>(true);
 
   constructor(private httpClient: HttpClient) { }
 
-  getProducts(): Observable<Product[]>{
-    return this.httpClient.get<Product[]>(this.api + 'product/list');
+  getProducts(): Observable<ProductModel[]>{
+    return this.httpClient.get<ProductModel[]>(this.api + 'products');
   }
 
-  addProduct(product:Product){
+  validateCard(req:any):Observable<any>{
+    return this.httpClient.post<any>(this.api +'placeorder',req);
+  }
+
+  addProduct(product:ProductModel){
     if(this.mylist.length === 0){
       product.quantity = 1;
       this.mylist.push(product);
@@ -48,6 +54,9 @@ export class StoreService {
       return product.id !=id;
     });
     this.myCart.next(this.mylist);
+    if(this.countProducts() <= 0){
+      this.isShowProducts.next(true);
+    }
   }
 
   findProductById(id: number) {
@@ -61,7 +70,13 @@ export class StoreService {
   }
 
   countProducts(){
-    return this.mylist.length;
+    const i = this.mylist.reduce(function (acc, product) { return acc + product.quantity; }, 0)
+    return i;
+  }
+
+  resetList(){
+    this.mylist = [];
+    this.myCart.next(this.mylist);
   }
 
 }

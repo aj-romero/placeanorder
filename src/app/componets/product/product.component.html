@@ -3,14 +3,16 @@
         <h3 class="product-header-title">
             {{product.name}}
         </h3>
+        <p>SKU: {{product.code}}</p>
         <p>$ {{product.price}}</p>
         <div class="product-body">
-            Quatity avaible {{product.avaibleStock}}
+            <!-- Quatity avaible {{product.avaibleStock}} -->
         </div>
-        <div class="product-footer">
-            <button class="product-footer-button" (click)="addToCart(product)">
-                <i class="fa-solid fa-basket-shopping"></i>
-            </button>
-        </div>
+        
+    </div>
+    <div class="product-footer">
+        <button class="product-footer-button" (click)="addToCart(product)">
+            <i class="fa-solid fa-basket-shopping"></i>
+        </button>
     </div>
 </article>

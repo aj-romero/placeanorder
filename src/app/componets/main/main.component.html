@@ -5,10 +5,15 @@
           <span aria-hidden="true">&times;</span>
         </button>
     </div>
-    <div class="container-title">
-        <h2>Products</h2>
+    <div *ngIf="showProducts">
+        <div class="container-title">
+            <h2>Products</h2>
+        </div>
+        <div class="container-products">
+            <app-product></app-product>
+        </div>
     </div>
-    <div class="container-products">
-        <app-product></app-product>
+    <div class="col-md-12 p-2" *ngIf="!showProducts">
+        <app-checkout></app-checkout>
     </div>
 </div>

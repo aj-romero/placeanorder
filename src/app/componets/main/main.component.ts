@@ -10,17 +10,16 @@ import { StoreService } from 'src/app/service/store.service';
 export class MainComponent implements OnInit{
   products:Product[]=[];
   alert:boolean=false;
+  showProducts:boolean=true;
   constructor(private storeService:StoreService){}
 
   ngOnInit(): void{
-    // this.storeService.getProducts().subscribe((res)=>{
-    //     this.products = res;
-    //     //console.log(this.products);
-        
-    // });
     this.storeService.viewAlert.subscribe((alert) => {
       this.alert = alert;
-    })
+    });
+    this.storeService.isShowProducts.subscribe((state) =>{
+      this.showProducts = state;
+    });
   }
 
   closeAlert(){

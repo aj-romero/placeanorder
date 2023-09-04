@@ -8,6 +8,8 @@ import { MainComponent } from './componets/main/main.component';
 import { ProductComponent } from './componets/product/product.component';
 import { CartComponent } from './componets/cart/cart.component';
 import { StoreComponent } from './componets/store/store.component';
+import { CheckoutComponent } from './componets/checkout/checkout.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -16,12 +18,14 @@ import { StoreComponent } from './componets/store/store.component';
     MainComponent,
     ProductComponent,
     CartComponent,
-    StoreComponent
+    StoreComponent,
+    CheckoutComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
