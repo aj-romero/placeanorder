@@ -1,5 +1,5 @@
 package com.ajromero.domain;
 
 public interface ICalcTotal {
-    Double calculateTotal(Items item);
+    Double calculateTotal(ProductDto item);
 }

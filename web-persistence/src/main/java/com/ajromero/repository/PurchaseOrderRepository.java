@@ -1,0 +1,11 @@
+package com.ajromero.repository;
+
+
+import com.ajromero.domain.PurchaseOrder;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+@Repository
+public interface PurchaseOrderRepository extends JpaRepository<PurchaseOrder, String> {
+}
+

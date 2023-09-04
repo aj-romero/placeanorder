@@ -1,6 +1,8 @@
 package com.ajromero.controller;
 
 import com.ajromero.domain.Product;
+import com.ajromero.domain.ProductDto;
+import com.ajromero.mapper.ProductDtoMapper;
 import com.ajromero.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("api/v1/products")
@@ -18,8 +21,15 @@ import java.util.List;
 public class ProductController {
     @Autowired
     IProductService productService;
+    @Autowired
+    ProductDtoMapper productDtoMapper;
+
     @GetMapping
-    public ResponseEntity<List<Product>> list() {
-        return new ResponseEntity<>(productService.getProducts(), HttpStatus.OK);
+    public ResponseEntity<List<ProductDto>> list() {
+        List<ProductDto> result = productService.getProducts()
+                                    .stream()
+                                    .map(productDtoMapper)
+                                    .collect(Collectors.toList());
+        return new ResponseEntity<>(result, HttpStatus.OK);
     }
 }

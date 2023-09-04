@@ -5,5 +5,7 @@ import com.ajromero.domain.PlaceAnOrder;
 public interface IProcessValidation {
     ServiceResponse validateOrder(PlaceAnOrder po);
 
-    String getReserveFunds();
+    ServiceResponse validateItems(PlaceAnOrder po);
+
+    ServiceResponse updateInventory(PlaceAnOrder po);
 }

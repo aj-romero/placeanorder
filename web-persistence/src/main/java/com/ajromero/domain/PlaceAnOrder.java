@@ -11,21 +11,22 @@ import java.util.TreeSet;
 public class PlaceAnOrder {
     private String name;
     private String creditCardNumber;
-    private Set<Items> items;
+    private Set<ProductDto> products;
 
-    public PlaceAnOrder(String name, String creditCardNumber, Set<Items> items) {
+    public PlaceAnOrder(String name, String creditCardNumber, Set<ProductDto> products) {
         this.name = name;
         this.creditCardNumber = creditCardNumber;
-        if(items != null){
-            this.items = new TreeSet<>(items);
+        if(products != null){
+            this.products = new TreeSet<>(products);
         }else{
-            this.items = new TreeSet<>();
+            this.products = new TreeSet<>();
         }
     }
 
     public double calculateTotalList() {
         double totalList = 0;
-        totalList = this.items.stream().mapToDouble(Items::calculateTotal).sum();
+        totalList = this.products.stream().mapToDouble(ProductDto::calculateTotal).sum();
         return totalList;
     }
+
 }

@@ -40,4 +40,11 @@ public class Product {
     public Integer getReserved() {
         return this.reserved != null?this.reserved: 0;
     }
+
+    public void adjustStock(int quantity) {
+        int newQuantity = this.stock - quantity;
+        if(newQuantity >=0) {
+            this.stock = newQuantity;
+        }
+    }
 }
