@@ -4,6 +4,7 @@ import com.ajromero.domain.PlaceAnOrder;
 import com.ajromero.service.IProcessValidation;
 import com.ajromero.service.ProcessPoService;
 import com.ajromero.service.ServiceResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,10 +13,9 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("api/v1/placeorder")
 @CrossOrigin("*")
 public class PlaceAnOrderController {
+    @Autowired
     IProcessValidation processValidation;
-    public PlaceAnOrderController(){
-        processValidation = new ProcessPoService();
-    }
+
     @PostMapping
     public ResponseEntity<ServiceResponse> save(@RequestBody PlaceAnOrder order) {
         ServiceResponse res = processValidation.validateOrder(order);

@@ -1,6 +1,5 @@
 package com.ajromero.domain.itemsvalidation;
 
-import com.ajromero.domain.Items;
 import com.ajromero.domain.ProductDto;
 
 public interface IValidateItems {

@@ -5,16 +5,19 @@ import com.ajromero.domain.payment.PayByCC;
 import com.ajromero.domain.payment.ReserveFundByCC;
 import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class ProcessPoService implements IProcessValidation {
     private ProcessPO processPO;
     private ServiceResponse serviceResponse;
+
     @Autowired
-    private ProductService productService;
+    private IProductService productService;
 
     @Autowired
     private IPurchaseOrder purchaseOrderService;
+
     @Autowired
     private IOrderDetail orderDetailService;
 
@@ -98,13 +101,15 @@ public class ProcessPoService implements IProcessValidation {
     }
 
     private void setOrderDetail(Set<ProductDto> items, PurchaseOrder po) {
-        OrderDetail odetail = new OrderDetail();
+        OrderDetail odetail;
         for (ProductDto i: items) {
+            odetail = new OrderDetail();
             Product productDB = productService.findById(i.getId());
             productDB = updateProduct(productDB, i.getQuantity());
             odetail.setProduct(productDB);
             odetail.setOrder(po);
             odetail.setPrice(i.getPrice());
+            odetail.setQuantity(i.getQuantity());
             orderDetailService.save(odetail);
         }
     }

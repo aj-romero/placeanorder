@@ -1,9 +1,6 @@
 package com.ajromero.domain.itemsvalidation;
 
-import com.ajromero.domain.Items;
 import com.ajromero.domain.ProductDto;
-
-import java.util.Set;
 
 public class CodeRange implements IValidateItems{
     @Override
