@@ -2,7 +2,6 @@ package com.ajromero.service;
 
 import com.ajromero.domain.entity.Product;
 import com.ajromero.domain.entity.PurchaseOrder;
-
 import java.util.List;
 
 public interface IProductService {

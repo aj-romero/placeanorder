@@ -9,13 +9,11 @@ import static org.hibernate.type.SqlTypes.*;
 import static org.hibernate.type.descriptor.DateTimeUtils.*;
 
 import jakarta.persistence.TemporalType;
-
 import java.sql.Types;
 import java.time.temporal.TemporalAccessor;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.TimeZone;
-
 import org.hibernate.ScrollMode;
 import org.hibernate.boot.model.FunctionContributions;
 import org.hibernate.boot.model.TypeContributions;
@@ -178,28 +176,28 @@ public class SQLiteDialect extends Dialect {
     @Override
     public String timestampdiffPattern(
             TemporalUnit unit, TemporalType fromTemporalType, TemporalType toTemporalType) {
-        final StringBuilder pattern = new StringBuilder();
+        final StringBuilder patternString = new StringBuilder();
         switch (unit) {
             case YEAR:
-                extractField(pattern, YEAR, unit);
+                extractField(patternString, YEAR, unit);
                 break;
             case QUARTER:
-                pattern.append("(");
-                extractField(pattern, YEAR, unit);
-                pattern.append("+");
-                extractField(pattern, QUARTER, unit);
-                pattern.append(")");
+                patternString.append("(");
+                extractField(patternString, YEAR, unit);
+                patternString.append("+");
+                extractField(patternString, QUARTER, unit);
+                patternString.append(")");
                 break;
             case MONTH:
-                pattern.append("(");
-                extractField(pattern, YEAR, unit);
-                pattern.append("+");
-                extractField(pattern, MONTH, unit);
-                pattern.append(")");
+                patternString.append("(");
+                extractField(patternString, YEAR, unit);
+                patternString.append("+");
+                extractField(patternString, MONTH, unit);
+                patternString.append(")");
                 break;
             case WEEK: // week is not supported by extract() when the argument is a duration
             case DAY:
-                extractField(pattern, DAY, unit);
+                extractField(patternString, DAY, unit);
                 break;
             // in order to avoid multiple calls to extract(),
             // we use extract(epoch from x - y) * factor for
@@ -209,12 +207,12 @@ public class SQLiteDialect extends Dialect {
             case SECOND:
             case NANOSECOND:
             case NATIVE:
-                extractField(pattern, EPOCH, unit);
+                extractField(patternString, EPOCH, unit);
                 break;
             default:
                 throw new SemanticException("unrecognized field: " + unit);
         }
-        return pattern.toString();
+        return patternString.toString();
     }
 
     private void extractField(StringBuilder pattern, TemporalUnit unit, TemporalUnit toUnit) {
@@ -234,7 +232,8 @@ public class SQLiteDialect extends Dialect {
         final BasicTypeRegistry basicTypeRegistry =
                 functionContributions.getTypeConfiguration().getBasicTypeRegistry();
         final BasicType<String> stringType = basicTypeRegistry.resolve(StandardBasicTypes.STRING);
-        final BasicType<Integer> integerType = basicTypeRegistry.resolve(StandardBasicTypes.INTEGER);
+        final BasicType<Integer> integerType = basicTypeRegistry
+                                                .resolve(StandardBasicTypes.INTEGER);
 
         CommonFunctionFactory functionFactory = new CommonFunctionFactory(functionContributions);
         functionFactory.mod_operator();
@@ -327,8 +326,11 @@ public class SQLiteDialect extends Dialect {
                 return character == ' ' ? "ltrim(?1)" : "ltrim(?1,'" + character + "')";
             case TRAILING:
                 return character == ' ' ? "rtrim(?1)" : "rtrim(?1,'" + character + "')";
+            default:
+                throw new UnsupportedOperationException("Unsupported specification: "
+                            + specification);
         }
-        throw new UnsupportedOperationException("Unsupported specification: " + specification);
+
     }
 
     protected boolean supportsMathFunctions() {
@@ -394,9 +396,11 @@ public class SQLiteDialect extends Dialect {
     private static final ViolatedConstraintNameExtractor EXTRACTOR =
             new TemplatedViolatedConstraintNameExtractor(
                     sqle -> {
-                        final int errorCode = JdbcExceptionHelper.extractErrorCode(sqle);
+                        final int errorCode = JdbcExceptionHelper
+                                            .extractErrorCode(sqle);
                         if (errorCode == SQLITE_CONSTRAINT) {
-                            return extractUsingTemplate("constraint ", " failed", sqle.getMessage());
+                            return extractUsingTemplate("constraint ",
+                                     " failed", sqle.getMessage());
                         }
                         return null;
                     });
@@ -459,12 +463,14 @@ public class SQLiteDialect extends Dialect {
             String referencedTable,
             String[] primaryKey,
             boolean referencesPrimaryKey) {
-        throw new UnsupportedOperationException("No add foreign key syntax supported by SQLiteDialect");
+        throw new UnsupportedOperationException("No add foreign key "
+               + "syntax supported by SQLiteDialect");
     }
 
     @Override
     public String getAddPrimaryKeyConstraintString(String constraintName) {
-        throw new UnsupportedOperationException("No add primary key syntax supported by SQLiteDialect");
+        throw new UnsupportedOperationException("No add primary key"
+                + " syntax supported by SQLiteDialect");
     }
 
     @Override
@@ -615,13 +621,15 @@ public class SQLiteDialect extends Dialect {
                 break;
             case TIME:
                 appender.appendSql("time(");
-                appendAsTime(appender, temporalAccessor, supportsTemporalLiteralOffset(), jdbcTimeZone);
+                appendAsTime(appender, temporalAccessor,
+                        supportsTemporalLiteralOffset(), jdbcTimeZone);
                 appender.appendSql(')');
                 break;
             case TIMESTAMP:
                 appender.appendSql("datetime(");
                 appendAsTimestampWithNanos(
-                        appender, temporalAccessor, supportsTemporalLiteralOffset(), jdbcTimeZone);
+                        appender, temporalAccessor,
+                        supportsTemporalLiteralOffset(), jdbcTimeZone);
                 appender.appendSql(')');
                 break;
             default:
@@ -655,7 +663,8 @@ public class SQLiteDialect extends Dialect {
 
     @Override
     public void appendDateTimeLiteral(
-            SqlAppender appender, Calendar calendar, TemporalType precision, TimeZone jdbcTimeZone) {
+            SqlAppender appender, Calendar calendar,
+            TemporalType precision, TimeZone jdbcTimeZone) {
         switch (precision) {
             case DATE:
                 appender.appendSql("date(");

@@ -38,4 +38,17 @@ public class ProductDto implements Comparable<ProductDto> {
     public int compareTo(ProductDto product) {
         return id.compareTo(product.getId());
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ProductDto productDto = (ProductDto) o;
+        return this.id.equals(productDto.getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return this.id.hashCode() + 58;
+    }
 }

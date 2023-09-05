@@ -32,13 +32,16 @@ public class PurchaseOrderMapper implements Function<PurchaseOrderDto, PurchaseO
     private void detailMapper(PurchaseOrder purchaseOrder, Set<ProductDto> items) {
         OrderDetail odetail;
         for (ProductDto i: items) {
-            odetail = new OrderDetail();
+            odetail = instanceOrderDetail();
             Product productDB = productService.findById(i.getId());
             odetail.setProduct(productDB);
             odetail.setPrice(i.getPrice());
             odetail.setQuantity(i.getQuantity());
             purchaseOrder.addOrderDetail(odetail);
         }
+    }
 
+    private OrderDetail instanceOrderDetail(){
+        return new OrderDetail();
     }
 }

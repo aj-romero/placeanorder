@@ -3,17 +3,17 @@ package com.ajromero.domain.payment;
 import java.util.UUID;
 //design pattern singleton
 
-public class GenerateUUID {
+public class GenerateUuid {
 
-    private GenerateUUID() {
+    private GenerateUuid() {
     }
 
     private static class RegisterGenerate {
-        static GenerateUUID INSTANACE = new GenerateUUID();
+        private static GenerateUuid intance = new GenerateUuid();
     }
 
-    public static GenerateUUID getInstance() {
-        return RegisterGenerate.INSTANACE;
+    public static GenerateUuid getInstance() {
+        return RegisterGenerate.intance;
     }
 
     public String generateCode() {

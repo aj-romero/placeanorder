@@ -1,6 +1,7 @@
 package com.ajromero.domain.entity;
 
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.Order;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -32,6 +33,19 @@ public class OrderDetail implements Comparable<OrderDetail> {
     @Override
     public int compareTo(OrderDetail o) {
         return this.product.getId().compareTo(o.getProduct().getId());
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        OrderDetail orderDetail = (OrderDetail) o;
+        return this.product.getId().equals(orderDetail.getProduct().getId());
+    }
+
+    @Override
+    public int hashCode() {
+        return this.id.hashCode() + 58;
     }
 
 }

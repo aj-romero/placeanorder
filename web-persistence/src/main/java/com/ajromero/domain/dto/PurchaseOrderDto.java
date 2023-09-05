@@ -24,9 +24,7 @@ public class PurchaseOrderDto {
     }
 
     public double calculateTotalList() {
-        double totalList = 0;
-        totalList = this.products.stream().mapToDouble(ProductDto::calculateTotal).sum();
-        return totalList;
+        return this.products.stream().mapToDouble(ProductDto::calculateTotal).sum();
     }
 
 }

@@ -22,7 +22,10 @@ public class ProductService implements IProductService {
 
     @Override
     public Product findById(Integer id) {
-        return productRepository.findById(id).get();
+       if (productRepository.findById(id).isPresent()){
+           return productRepository.findById(id).orElseThrow();
+       }
+       return null;
     }
 
     @Override

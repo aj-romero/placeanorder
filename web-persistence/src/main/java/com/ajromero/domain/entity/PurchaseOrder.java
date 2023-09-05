@@ -1,6 +1,6 @@
 package com.ajromero.domain.entity;
 
-import com.ajromero.domain.payment.GenerateUUID;
+import com.ajromero.domain.payment.GenerateUuid;
 import com.ajromero.domain.payment.IPayment;
 import com.ajromero.domain.payment.IReserveFund;
 import jakarta.persistence.*;
@@ -42,8 +42,8 @@ public class PurchaseOrder {
     }
 
     public PurchaseOrder() {
-        GenerateUUID uuid;
-        uuid = GenerateUUID.getInstance();
+        GenerateUuid uuid;
+        uuid = GenerateUuid.getInstance();
         this.id = uuid.generateCode();
         this.products = new TreeSet<>();
     }
