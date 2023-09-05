@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder  } from '@angular/forms';
 import { StoreService } from 'src/app/service/store.service';
 import { PlaceAnOrderModel } from 'src/app/model/placeanorder-model';
+import { ResponseModel } from 'src/app/model/response-model';
+import { ProductModel } from 'src/app/model/product-model';
 
 @Component({
   selector: 'app-checkout',
@@ -16,6 +18,8 @@ export class CheckoutComponent implements OnInit {
   alert:boolean = false;
   submitted:boolean = false;
   errorMsj:String='';
+  respModel: ResponseModel = new ResponseModel();
+  items: ProductModel[] = [];
 
   constructor(private storeService:StoreService, private fb: FormBuilder){
 
@@ -40,10 +44,10 @@ export class CheckoutComponent implements OnInit {
     if (this.formCheckout.valid) {
       this.setValues();
       this.storeService.validateCard(this.placeAnOrder).subscribe((resp) =>{
-          console.log(resp);
+          //console.log(resp);
           if(resp.success){
-             // this.cleanAndReturn();
-             this.errorMessage(resp.message);
+             this.respModel = resp;
+             this.storeService.resetList();//limpiamos la lista del carrito
           }else{
                 this.errorMessage(resp.message);
           }
@@ -58,8 +62,9 @@ export class CheckoutComponent implements OnInit {
   }
 
   cleanAndReturn(){
-          this.storeService.resetList();//limpiamos la lista del carrito
           this.storeService.isShowProducts.next(true); //esto para regresar al app-products
+          this.items = [];
+          this.placeAnOrder = new PlaceAnOrderModel();          
   }
 
   setValues(){
@@ -67,13 +72,18 @@ export class CheckoutComponent implements OnInit {
     this.placeAnOrder.creditCardNumber = this.formCheckout.controls['creditCardNumber'].value;    
     
     this.storeService.myCart$.subscribe((list)=>{
-      this.placeAnOrder.products = list;
-      console.log(this.placeAnOrder);
+      this.placeAnOrder.products = [...list];
             
     });
+    this.items =[...this.placeAnOrder.products];
   }
 
   closeAlert(){
     this.alert = false;
+  }
+
+  totalItems() {
+    const total = this.items.reduce(function (acc, product) { return acc + (product.quantity * product.price); }, 0);
+    return total;
   }
 }

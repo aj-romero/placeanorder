@@ -4,7 +4,7 @@
       <span aria-hidden="true">&times;</span>
     </button>
 </div>
-<div class="row">
+<div *ngIf="!respModel.success"  class="row">
     <div class="col-sm-4">
         <div class="form">
             <form [formGroup]="formCheckout" (ngSubmit)="save()">
@@ -52,7 +52,46 @@
                 <td class="alnright">$ {{totalProduct(product.price,product.quantity)}}</td>
               </tr>
             </tbody>
-          </table> 
+        </table> 
+    </div>
+</div>
+<div *ngIf="respModel.success" class="row">
+    <div class="row">
+       <h4 class="alert-heading">Congratulations your order is placed successfully!</h4>
+        <ul>
+            <li><strong>Order ID:</strong> {{respModel.orderId}}</li>
+            <li><strong>Reserved :</strong> {{respModel.fundReservedCode}}</li>
+            <li><strong>Payment Confirmation:</strong> {{respModel.paymentCode}}</li>
+        </ul>
+      
+    </div>
+    <div class="row">
+        <div class="col-sm-4"> 
+            <button (click)="cleanAndReturn()" type="button" class="btn btn-success">Products</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="cartTotal">
+            <p class="cartTotal-total">Total: $ {{totalItems() | number : '1.2-2'}}</p>
+        </div>
+        <table class="table mt-2 table-bordered">
+            <thead class="table-primary">
+              <tr>
+                <th>Name</th>
+                <th>Quantity</th>
+                <th>Price</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let product of items">
+                <td>{{product.name}}</td>
+                <td class="alnright">{{product.quantity}}</td>
+                <td class="alnright">$ {{product.price | number : '1.2-2'}}</td>
+                <td class="alnright">$ {{totalProduct(product.price,product.quantity)}}</td>
+              </tr>
+            </tbody>
+        </table> 
     </div>
 </div>
 
