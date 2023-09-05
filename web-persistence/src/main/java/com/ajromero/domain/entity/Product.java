@@ -5,7 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 @Entity
-@Table(name="products")
+@Table(name = "products")
 @Getter
 @Setter
 public class Product {
@@ -31,19 +31,18 @@ public class Product {
         this.price = price;
         this.reserved = 0;
     }
-    public Product(){}
 
     public Integer getAvaibleStock() {
-        return this.reserved != null?(this.stock - this.reserved): this.stock;
+        return this.reserved != null ? (this.stock - this.reserved) : this.stock;
     }
 
     public Integer getReserved() {
-        return this.reserved != null?this.reserved: 0;
+        return this.reserved != null ? this.reserved : 0;
     }
 
     public void adjustStock(int quantity) {
         int newQuantity = this.stock - quantity;
-        if(newQuantity >=0) {
+        if (newQuantity >= 0) {
             this.stock = newQuantity;
         }
     }

@@ -4,7 +4,7 @@ import lombok.Getter;
 import lombok.ToString;
 
 @ToString
-public class ProductDto implements Comparable<ProductDto>{
+public class ProductDto implements Comparable<ProductDto> {
     @Getter private Integer id;
     @Getter private String code;
     @Getter private String name;
@@ -21,14 +21,16 @@ public class ProductDto implements Comparable<ProductDto>{
         this.quantity = quantity;
 
     }
+
     public ProductDto() {
         this.calculateTotal = new CalculateTotal();
     }
+
     public ProductDto(Integer id, String code, String name, Double price) {
         this(id,code, name,price,0);
     }
 
-    public Double calculateTotal(){
+    public Double calculateTotal() {
         return this.calculateTotal.calculateTotal(this);
     }
 

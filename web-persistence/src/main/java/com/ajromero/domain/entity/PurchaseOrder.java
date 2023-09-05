@@ -4,14 +4,15 @@ import com.ajromero.domain.payment.GenerateUUID;
 import com.ajromero.domain.payment.IPayment;
 import com.ajromero.domain.payment.IReserveFund;
 import jakarta.persistence.*;
+import java.util.Set;
+import java.util.TreeSet;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.Set;
-import java.util.TreeSet;
+
 
 @Entity
-@Table(name="purchase__order")
+@Table(name = "purchase__order")
 @Getter
 @Setter
 public class PurchaseOrder {
@@ -22,29 +23,32 @@ public class PurchaseOrder {
     @Column
     private String paymentCode;
 
-    @OneToMany(mappedBy="order", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL)
     private Set<OrderDetail> products;
 
     public PurchaseOrder(IReserveFund reserveFund, IPayment payment, Set<OrderDetail> products) {
         this(reserveFund, payment);
-        if(products != null){
+        if (products != null) {
             this.products = new TreeSet<>(products);
-        }else{
+        } else {
             this.products = new TreeSet<>();
         }
     }
-    public PurchaseOrder(IReserveFund reserveFund, IPayment payment){
+
+    public PurchaseOrder(IReserveFund reserveFund, IPayment payment) {
         this();
-        this.fundReservedCode=reserveFund.reserveFunds();
+        this.fundReservedCode = reserveFund.reserveFunds();
         this.paymentCode = payment.pay();
     }
-    public PurchaseOrder(){
+
+    public PurchaseOrder() {
         GenerateUUID uuid;
         uuid = GenerateUUID.getInstance();
         this.id = uuid.generateCode();
         this.products = new TreeSet<>();
     }
-    public void addOrderDetail(OrderDetail orderDetail){
+
+    public void addOrderDetail(OrderDetail orderDetail) {
         orderDetail.setOrder(this);
         this.products.add(orderDetail);
     }

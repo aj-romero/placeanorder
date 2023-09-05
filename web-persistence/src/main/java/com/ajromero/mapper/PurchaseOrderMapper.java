@@ -8,16 +8,18 @@ import com.ajromero.domain.entity.PurchaseOrder;
 import com.ajromero.domain.payment.PayByCC;
 import com.ajromero.domain.payment.ReserveFundByCC;
 import com.ajromero.service.IProductService;
+import java.util.Set;
+import java.util.function.Function;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Set;
-import java.util.function.Function;
+
 
 @Service
 public class PurchaseOrderMapper implements Function<PurchaseOrderDto, PurchaseOrder> {
     @Autowired
     private IProductService productService;
+
     @Override
     public PurchaseOrder apply(PurchaseOrderDto purchaseOrderDto) {
         PurchaseOrder purchaseOrder = new PurchaseOrder();

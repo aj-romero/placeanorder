@@ -1,10 +1,10 @@
 package com.ajromero.domain.dto;
 
+import java.util.Set;
+import java.util.TreeSet;
 import lombok.Getter;
 import lombok.ToString;
 
-import java.util.Set;
-import java.util.TreeSet;
 
 @Getter
 @ToString
@@ -16,9 +16,9 @@ public class PurchaseOrderDto {
     public PurchaseOrderDto(String name, String creditCardNumber, Set<ProductDto> products) {
         this.name = name;
         this.creditCardNumber = creditCardNumber;
-        if(products != null){
+        if (products != null) {
             this.products = new TreeSet<>(products);
-        }else{
+        } else {
             this.products = new TreeSet<>();
         }
     }
