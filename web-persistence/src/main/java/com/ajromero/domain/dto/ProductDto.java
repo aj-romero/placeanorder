@@ -1,4 +1,4 @@
-package com.ajromero.domain;
+package com.ajromero.domain.dto;
 
 import lombok.Getter;
 import lombok.ToString;

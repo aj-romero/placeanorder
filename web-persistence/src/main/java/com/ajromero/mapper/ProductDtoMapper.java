@@ -1,7 +1,7 @@
 package com.ajromero.mapper;
 
 import com.ajromero.domain.entity.Product;
-import com.ajromero.domain.ProductDto;
+import com.ajromero.domain.dto.ProductDto;
 import org.springframework.stereotype.Service;
 
 import java.util.function.Function;

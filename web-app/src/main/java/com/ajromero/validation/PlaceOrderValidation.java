@@ -1,6 +1,6 @@
 package com.ajromero.validation;
 
-import com.ajromero.domain.PlaceAnOrder;
+import com.ajromero.domain.dto.PurchaseOrderDto;
 import com.ajromero.service.ServiceResponse;
 import com.ajromero.validation.card.CheckCardValidNumber;
 import com.ajromero.validation.card.CheckFistNumbers;
@@ -22,7 +22,7 @@ public class PlaceOrderValidation implements IPlaceOrderValidation{
     }
 
     @Override
-    public ServiceResponse validateOrder(PlaceAnOrder po) {
+    public ServiceResponse validateOrder(PurchaseOrderDto po) {
         if(!validCardNumber(new CheckCardValidNumber(),po)){
             return buildServiceResponse(false,"The credit card number is not a valid number");
         }
@@ -53,7 +53,7 @@ public class PlaceOrderValidation implements IPlaceOrderValidation{
         return serviceResponse;
     }
 
-    private boolean validCardNumber(ICheckCardValidNumber validator, PlaceAnOrder po){
+    private boolean validCardNumber(ICheckCardValidNumber validator, PurchaseOrderDto po){
         return validator.checkValidNumber(po.getCreditCardNumber());
     }
 

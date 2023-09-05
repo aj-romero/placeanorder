@@ -22,12 +22,11 @@ public class PurchaseOrder {
     @Column
     private String paymentCode;
 
-    @OneToMany(mappedBy="order")
+    @OneToMany(mappedBy="order", cascade = CascadeType.ALL)
     private Set<OrderDetail> products;
 
-    public PurchaseOrder(String fundReservedCode, String paymentCode, Set<OrderDetail> products) {
-        this.fundReservedCode = fundReservedCode;
-        this.paymentCode = paymentCode;
+    public PurchaseOrder(IReserveFund reserveFund, IPayment payment, Set<OrderDetail> products) {
+        this(reserveFund, payment);
         if(products != null){
             this.products = new TreeSet<>(products);
         }else{
@@ -43,6 +42,11 @@ public class PurchaseOrder {
         GenerateUUID uuid;
         uuid = GenerateUUID.getInstance();
         this.id = uuid.generateCode();
+        this.products = new TreeSet<>();
+    }
+    public void addOrderDetail(OrderDetail orderDetail){
+        orderDetail.setOrder(this);
+        this.products.add(orderDetail);
     }
 
 }

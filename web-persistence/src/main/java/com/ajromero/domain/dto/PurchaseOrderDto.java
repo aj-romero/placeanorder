@@ -1,4 +1,4 @@
-package com.ajromero.domain;
+package com.ajromero.domain.dto;
 
 import lombok.Getter;
 import lombok.ToString;
@@ -8,12 +8,12 @@ import java.util.TreeSet;
 
 @Getter
 @ToString
-public class PlaceAnOrder {
+public class PurchaseOrderDto {
     private String name;
     private String creditCardNumber;
     private Set<ProductDto> products;
 
-    public PlaceAnOrder(String name, String creditCardNumber, Set<ProductDto> products) {
+    public PurchaseOrderDto(String name, String creditCardNumber, Set<ProductDto> products) {
         this.name = name;
         this.creditCardNumber = creditCardNumber;
         if(products != null){

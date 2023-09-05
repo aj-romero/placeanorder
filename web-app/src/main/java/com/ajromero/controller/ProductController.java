@@ -1,6 +1,6 @@
 package com.ajromero.controller;
 
-import com.ajromero.domain.ProductDto;
+import com.ajromero.domain.dto.ProductDto;
 import com.ajromero.mapper.ProductDtoMapper;
 import com.ajromero.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;

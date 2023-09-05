@@ -1,4 +1,4 @@
-package com.ajromero.domain;
+package com.ajromero.domain.dto;
 
 public class CalculateTotal implements ICalcTotal{
     @Override
