@@ -1,6 +1,5 @@
 package com.ajromero.controller;
 
-import com.ajromero.domain.Product;
 import com.ajromero.domain.ProductDto;
 import com.ajromero.mapper.ProductDtoMapper;
 import com.ajromero.service.IProductService;

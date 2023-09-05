@@ -1,13 +1,14 @@
-package com.ajromero.domain;
+package com.ajromero.domain.entity;
 
 import com.ajromero.domain.payment.GenerateUUID;
+import com.ajromero.domain.payment.IPayment;
+import com.ajromero.domain.payment.IReserveFund;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.UUID;
 
 @Entity
 @Table(name="purchase__order")
@@ -21,7 +22,6 @@ public class PurchaseOrder {
     @Column
     private String paymentCode;
 
-    //pendiente relacion de onetomay -- > list
     @OneToMany(mappedBy="order")
     private Set<OrderDetail> products;
 
@@ -34,10 +34,10 @@ public class PurchaseOrder {
             this.products = new TreeSet<>();
         }
     }
-    public PurchaseOrder(String fundReservedCode, String paymentCode){
+    public PurchaseOrder(IReserveFund reserveFund, IPayment payment){
         this();
-        this.fundReservedCode=fundReservedCode;
-        this.paymentCode = paymentCode;
+        this.fundReservedCode=reserveFund.reserveFunds();
+        this.paymentCode = payment.pay();
     }
     public PurchaseOrder(){
         GenerateUUID uuid;

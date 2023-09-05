@@ -1,6 +1,6 @@
 package com.ajromero.service;
 
-import com.ajromero.domain.Product;
+import com.ajromero.domain.entity.Product;
 import com.ajromero.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

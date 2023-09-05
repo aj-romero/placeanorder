@@ -1,4 +1,4 @@
-package com.ajromero.domain.itemsvalidation;
+package com.ajromero.validation.items;
 
 import com.ajromero.domain.ProductDto;
 

@@ -1,6 +1,9 @@
 package com.ajromero.service;
 
 import com.ajromero.domain.*;
+import com.ajromero.domain.entity.OrderDetail;
+import com.ajromero.domain.entity.Product;
+import com.ajromero.domain.entity.PurchaseOrder;
 import com.ajromero.domain.payment.PayByCC;
 import com.ajromero.domain.payment.ReserveFundByCC;
 import java.util.Set;
@@ -32,7 +35,7 @@ public class ProcessPoService implements IProcessValidation {
     }
 
     public ServiceResponse validate(PlaceAnOrder po) {
-        if (!processPO.validCardNumber(po.getCreditCardNumber())) {
+        /*if (!processPO.validCardNumber(po.getCreditCardNumber())) {
             serviceResponse.setSuccess(false);
             serviceResponse.setMessage("The credit card number is not a valid number");
             return serviceResponse;
@@ -54,7 +57,7 @@ public class ProcessPoService implements IProcessValidation {
             serviceResponse.setSuccess(false);
             serviceResponse.setMessage("The total amount should be greater than zero.");
             return serviceResponse;
-        }
+        }*/
 
         serviceResponse.setSuccess(true);
         serviceResponse.setMessage("Well done");
@@ -63,7 +66,7 @@ public class ProcessPoService implements IProcessValidation {
 
     @Override
     public ServiceResponse validateItems(PlaceAnOrder po) {
-        if (!processPO.validateCodeRange(po.getProducts())) {
+       /* if (!processPO.validateCodeRange(po.getProducts())) {
             serviceResponse.setSuccess(false);
             serviceResponse.setMessage("The product code is  between"
                     + " 239 – 384, and it is not acceptable");
@@ -73,7 +76,7 @@ public class ProcessPoService implements IProcessValidation {
             serviceResponse.setSuccess(false);
             serviceResponse.setMessage("The quantity of the product is not greater than zero");
             return serviceResponse;
-        }
+        }*/
         serviceResponse.setSuccess(true);
         serviceResponse.setMessage("Well done");
         return serviceResponse;
@@ -89,9 +92,7 @@ public class ProcessPoService implements IProcessValidation {
     }
 
     private PurchaseOrder createPurchaseOrder() {
-        String rfcode = processPO.getReserveFund(new ReserveFundByCC());
-        String payment = processPO.getPayment(new PayByCC());
-        PurchaseOrder porder = new PurchaseOrder(rfcode,payment);
+        PurchaseOrder porder = new PurchaseOrder(new ReserveFundByCC(),new PayByCC());
         return purchaseOrderService.save(porder);
     }
 

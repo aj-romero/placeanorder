@@ -1,4 +1,4 @@
-package com.ajromero.iplaceorder;
+package com.ajromero.validation.card;
 
 public class CheckRangeNumbers implements ICheckCardValidNumber {
     @Override

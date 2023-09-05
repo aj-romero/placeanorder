@@ -1,4 +1,4 @@
-package com.ajromero.domain;
+package com.ajromero.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.Getter;

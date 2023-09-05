@@ -1,22 +1,14 @@
 package com.ajromero.domain;
 
-import com.ajromero.domain.itemsvalidation.ItemsValidator;
-import com.ajromero.domain.payment.IPayment;
-import com.ajromero.domain.payment.IReserveFund;
-import com.ajromero.iplaceorder.CheckCardValidNumber;
-import com.ajromero.iplaceorder.CheckFistNumbers;
-import com.ajromero.iplaceorder.CheckRangeNumbers;
-import com.ajromero.iplaceorder.ICheckCardValidNumber;
 
-import java.util.Set;
 
 public class ProcessPO {
-    private ICheckCardValidNumber cardNumberValidation;
+   /* private ICheckCardValidNumber cardNumberValidation;
     private ICheckCardValidNumber firstNumberCardValidation;
     private ICheckCardValidNumber rangeNumberCardValidation;
-    private ItemsValidator itemsValidator;
+    private ItemsValidator itemsValidator;*/
 
-
+/*
     public ProcessPO() {
         this.cardNumberValidation = new CheckCardValidNumber();
         this.firstNumberCardValidation = new CheckFistNumbers();
@@ -48,5 +40,5 @@ public class ProcessPO {
 
     public String getPayment(IPayment payment){
         return payment.pay();
-    }
+    }*/
 }

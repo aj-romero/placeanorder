@@ -1,6 +1,6 @@
 package com.ajromero.repository;
 
-import com.ajromero.domain.OrderDetail;
+import com.ajromero.domain.entity.OrderDetail;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

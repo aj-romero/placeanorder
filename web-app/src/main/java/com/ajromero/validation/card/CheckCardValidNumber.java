@@ -1,4 +1,4 @@
-package com.ajromero.iplaceorder;
+package com.ajromero.validation.card;
 
 public class CheckCardValidNumber implements ICheckCardValidNumber {
 

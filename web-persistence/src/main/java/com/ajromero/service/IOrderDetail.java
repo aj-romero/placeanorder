@@ -1,6 +1,6 @@
 package com.ajromero.service;
 
-import com.ajromero.domain.OrderDetail;
+import com.ajromero.domain.entity.OrderDetail;
 
 import java.util.List;
 

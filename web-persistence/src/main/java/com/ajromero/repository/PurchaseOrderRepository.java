@@ -1,7 +1,7 @@
 package com.ajromero.repository;
 
 
-import com.ajromero.domain.PurchaseOrder;
+import com.ajromero.domain.entity.PurchaseOrder;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

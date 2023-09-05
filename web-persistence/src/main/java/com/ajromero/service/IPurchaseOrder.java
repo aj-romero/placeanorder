@@ -1,6 +1,6 @@
 package com.ajromero.service;
 
-import com.ajromero.domain.PurchaseOrder;
+import com.ajromero.domain.entity.PurchaseOrder;
 
 import java.util.List;
 
