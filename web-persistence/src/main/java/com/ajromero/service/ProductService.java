@@ -1,6 +1,5 @@
 package com.ajromero.service;
 
-import com.ajromero.domain.entity.OrderDetail;
 import com.ajromero.domain.entity.Product;
 import com.ajromero.domain.entity.PurchaseOrder;
 import com.ajromero.repository.ProductRepository;
@@ -22,10 +21,10 @@ public class ProductService implements IProductService {
 
     @Override
     public Product findById(Integer id) {
-       if (productRepository.findById(id).isPresent()){
-           return productRepository.findById(id).orElseThrow();
-       }
-       return null;
+        if (productRepository.findById(id).isPresent()) {
+            return productRepository.findById(id).orElseThrow();
+        }
+        return null;
     }
 
     @Override
@@ -35,11 +34,11 @@ public class ProductService implements IProductService {
 
     @Override
     public ServiceResponse updateInventory(PurchaseOrder order) {
-        for (OrderDetail detail:order.getProducts()) {
+        order.getProducts().forEach(detail -> {
             Product product = detail.getProduct();
             product.adjustStock(detail.getQuantity());
             this.save(product);
-        }
+        });
 
         return  commitOrder(order);
     }

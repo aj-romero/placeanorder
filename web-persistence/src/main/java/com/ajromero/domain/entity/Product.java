@@ -1,6 +1,12 @@
 package com.ajromero.domain.entity;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -34,12 +40,9 @@ public class Product {
         this.reserved = 0;
     }
 
-    public Integer getAvaibleStock() {
-        return this.reserved != null ? (this.stock - this.reserved) : this.stock;
-    }
-
-    public Integer getReserved() {
-        return this.reserved != null ? this.reserved : 0;
+    public Product(Product product) {
+        this(product.getCode(), product.getName(), product.getStock(), product.getPrice());
+        this.id = product.getId();
     }
 
     public void adjustStock(int quantity) {

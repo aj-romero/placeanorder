@@ -1,4 +1,4 @@
-package com.ajromero.domain.payment;
+package com.ajromero.utils;
 
 public interface IPayment {
 

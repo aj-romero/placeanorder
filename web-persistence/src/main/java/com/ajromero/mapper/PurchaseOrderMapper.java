@@ -5,43 +5,37 @@ import com.ajromero.domain.dto.PurchaseOrderDto;
 import com.ajromero.domain.entity.OrderDetail;
 import com.ajromero.domain.entity.Product;
 import com.ajromero.domain.entity.PurchaseOrder;
-import com.ajromero.domain.payment.PayByCC;
-import com.ajromero.domain.payment.ReserveFundByCC;
 import com.ajromero.service.IProductService;
+import com.ajromero.utils.PayByCC;
+import com.ajromero.utils.ReserveFundByCC;
 import java.util.Set;
 import java.util.function.Function;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-
-
-@Service
+@Component
 public class PurchaseOrderMapper implements Function<PurchaseOrderDto, PurchaseOrder> {
     @Autowired
     private IProductService productService;
 
     @Override
     public PurchaseOrder apply(PurchaseOrderDto purchaseOrderDto) {
-        PurchaseOrder purchaseOrder = new PurchaseOrder();
-        purchaseOrder.setFundReservedCode(new ReserveFundByCC().reserveFunds());
-        purchaseOrder.setPaymentCode(new PayByCC().pay());
+        PurchaseOrder purchaseOrder = new PurchaseOrder(new ReserveFundByCC(),new PayByCC());
         detailMapper(purchaseOrder,purchaseOrderDto.getProducts());
         return purchaseOrder;
     }
 
     private void detailMapper(PurchaseOrder purchaseOrder, Set<ProductDto> items) {
         OrderDetail odetail;
-        for (ProductDto i: items) {
-            odetail = instanceOrderDetail();
+        for (ProductDto i : items) {
             Product productDB = productService.findById(i.getId());
-            odetail.setProduct(productDB);
-            odetail.setPrice(i.getPrice());
-            odetail.setQuantity(i.getQuantity());
+            odetail = instanceOrderDetail(productDB, i.getPrice(), i.getQuantity());
             purchaseOrder.addOrderDetail(odetail);
         }
     }
 
-    private OrderDetail instanceOrderDetail(){
-        return new OrderDetail();
+    private OrderDetail instanceOrderDetail(Product product,
+                                            double price, Integer quantity) {
+        return new OrderDetail(quantity, price, product);
     }
 }

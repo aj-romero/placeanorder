@@ -1,9 +1,9 @@
-package com.ajromero.domain.payment;
+package com.ajromero.utils;
 
-public class PayByCC implements IPayment {
+public class ReserveFundByCC implements IReserveFund {
 
     @Override
-    public String pay() {
+    public String reserveFunds() {
         GenerateUuid generateUuid = GenerateUuid.getInstance();
         return generateUuid.generateCode();
     }

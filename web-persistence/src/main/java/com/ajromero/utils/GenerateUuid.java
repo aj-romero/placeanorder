@@ -1,4 +1,4 @@
-package com.ajromero.domain.payment;
+package com.ajromero.utils;
 
 import java.util.UUID;
 //design pattern singleton
@@ -9,11 +9,11 @@ public class GenerateUuid {
     }
 
     private static class RegisterGenerate {
-        private static GenerateUuid intance = new GenerateUuid();
+        private static final GenerateUuid INSTANCE = new GenerateUuid();
     }
 
     public static GenerateUuid getInstance() {
-        return RegisterGenerate.intance;
+        return RegisterGenerate.INSTANCE;
     }
 
     public String generateCode() {

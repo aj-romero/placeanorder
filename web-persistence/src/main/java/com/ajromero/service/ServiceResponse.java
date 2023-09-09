@@ -1,8 +1,10 @@
 package com.ajromero.service;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 public class ServiceResponse {
     private boolean success;
     private String message;

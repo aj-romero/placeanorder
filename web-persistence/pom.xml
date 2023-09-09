@@ -9,6 +9,7 @@
         <version>${revision}</version>
     </parent>
 
+
     <artifactId>web-persistence</artifactId>
 
     <properties>
@@ -37,8 +38,6 @@
             <artifactId>spring-data-jpa</artifactId>
         </dependency>
     </dependencies>
-
-
 
 
 </project>

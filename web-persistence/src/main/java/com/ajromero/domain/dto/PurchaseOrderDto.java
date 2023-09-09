@@ -6,12 +6,12 @@ import lombok.Getter;
 import lombok.ToString;
 
 
-@Getter
+
 @ToString
 public class PurchaseOrderDto {
-    private String name;
-    private String creditCardNumber;
-    private Set<ProductDto> products;
+    @Getter private final String name;
+    @Getter private final String creditCardNumber;
+    private final Set<ProductDto> products;
 
     public PurchaseOrderDto(String name, String creditCardNumber, Set<ProductDto> products) {
         this.name = name;
@@ -27,4 +27,7 @@ public class PurchaseOrderDto {
         return this.products.stream().mapToDouble(ProductDto::calculateTotal).sum();
     }
 
+    public Set<ProductDto> getProducts() {
+        return new TreeSet<>(this.products);
+    }
 }

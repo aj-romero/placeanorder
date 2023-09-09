@@ -1,5 +1,7 @@
 package com.ajromero.domain.dto;
 
+import com.ajromero.utils.CalculateTotal;
+import com.ajromero.utils.ICalcTotal;
 import lombok.Getter;
 import lombok.ToString;
 
@@ -10,7 +12,7 @@ public class ProductDto implements Comparable<ProductDto> {
     @Getter private String name;
     @Getter private Double price;
     @Getter private Integer quantity;
-    private ICalcTotal calculateTotal;
+    private final ICalcTotal calculateTotal;
 
     public ProductDto(Integer id, String code, String name, Double price, Integer quantity) {
         this();
@@ -41,8 +43,12 @@ public class ProductDto implements Comparable<ProductDto> {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
         ProductDto productDto = (ProductDto) o;
         return this.id.equals(productDto.getId());
     }
