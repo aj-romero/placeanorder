@@ -48,6 +48,7 @@ export class CheckoutComponent implements OnInit {
           if(resp.success){
              this.respModel = resp;
              this.storeService.resetList();//limpiamos la lista del carrito
+             this.closeAlert();
           }else{
                 this.errorMessage(resp.message);
           }
