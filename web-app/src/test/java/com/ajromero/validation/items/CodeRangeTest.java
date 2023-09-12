@@ -1,6 +1,7 @@
 package com.ajromero.validation.items;
 
 import com.ajromero.domain.dto.ProductDto;
+import com.ajromero.validation.card.CheckCardValidNumber;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,7 +16,12 @@ class CodeRangeTest {
         quantityValidator.nextValidate(null);
 
         assertNull(validateCode.validate(product));
+    }
 
+    @Test
+    void checkValidCardNumber(){
+        CheckCardValidNumber card = new CheckCardValidNumber();
+        assertFalse(card.checkValidNumber("412011000000102M"));
     }
 
 }
